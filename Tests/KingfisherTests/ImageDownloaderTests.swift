@@ -549,7 +549,7 @@ class ImageDownloaderTests: XCTestCase {
     func testSessionDelegate() {
         class ExtensionDelegate:SessionDelegate {
             //'exp' only for test
-            public let exp:XCTestExpectation
+            let exp:XCTestExpectation
             init(_ expectation:XCTestExpectation) {
                 exp = expectation
             }

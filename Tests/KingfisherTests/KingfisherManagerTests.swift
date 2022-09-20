@@ -1076,10 +1076,10 @@ class KingfisherManagerTests: XCTestCase {
 }
 
 class SimpleProcessor: ImageProcessor {
-    public let identifier = "id"
+    let identifier = "id"
     var processed = false
     /// Initialize a `DefaultImageProcessor`
-    public init() {}
+    init() {}
     
     /// Process an input `ImageProcessItem` item to an image for this processor.
     ///
@@ -1089,7 +1089,7 @@ class SimpleProcessor: ImageProcessor {
     /// - returns: The processed image.
     ///
     /// - Note: See documentation of `ImageProcessor` protocol for more.
-    public func process(item: ImageProcessItem, options: KingfisherParsedOptionsInfo) -> KFCrossPlatformImage? {
+    func process(item: ImageProcessItem, options: KingfisherParsedOptionsInfo) -> KFCrossPlatformImage? {
         processed = true
         switch item {
         case .image(let image):
@@ -1101,10 +1101,10 @@ class SimpleProcessor: ImageProcessor {
 }
 
 class FailingProcessor: ImageProcessor {
-    public let identifier = "FailingProcessor"
+    let identifier = "FailingProcessor"
     var processed = false
-    public init() {}
-    public func process(item: ImageProcessItem, options: KingfisherParsedOptionsInfo) -> KFCrossPlatformImage? {
+    init() {}
+    func process(item: ImageProcessItem, options: KingfisherParsedOptionsInfo) -> KFCrossPlatformImage? {
         processed = true
         return nil
     }

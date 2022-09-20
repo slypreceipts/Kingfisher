@@ -29,7 +29,7 @@ import SwiftUI
 import Combine
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-public protocol KFImageProtocol: View, KFOptionSetter {
+protocol KFImageProtocol: View, KFOptionSetter {
     associatedtype HoldingView: KFImageHoldingView
     var context: KFImage.Context<HoldingView> { get set }
     init(context: KFImage.Context<HoldingView>)
@@ -37,7 +37,7 @@ public protocol KFImageProtocol: View, KFOptionSetter {
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension KFImageProtocol {
-    public var body: some View {
+    var body: some View {
         ZStack {
             KFImageRenderer<HoldingView>(
                 context: context
@@ -48,7 +48,7 @@ extension KFImageProtocol {
     /// Creates a Kingfisher compatible image view to load image from the given `Source`.
     /// - Parameters:
     ///   - source: The image `Source` defining where to load the target image.
-    public init(source: Source?) {
+    init(source: Source?) {
         let context = KFImage.Context<HoldingView>(source: source)
         self.init(context: context)
     }
@@ -56,37 +56,37 @@ extension KFImageProtocol {
     /// Creates a Kingfisher compatible image view to load image from the given `URL`.
     /// - Parameters:
     ///   - source: The image `Source` defining where to load the target image.
-    public init(_ url: URL?) {
+    init(_ url: URL?) {
         self.init(source: url?.convertToSource())
     }
     
     /// Configures current image with a `block`. This block will be lazily applied when creating the final `Image`.
     /// - Parameter block: The block applies to loaded image.
     /// - Returns: A `KFImage` view that configures internal `Image` with `block`.
-    public func configure(_ block: @escaping (HoldingView) -> HoldingView) -> Self {
+    func configure(_ block: @escaping (HoldingView) -> HoldingView) -> Self {
         context.configurations.append(block)
         return self
     }
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-public protocol KFImageHoldingView: View {
+protocol KFImageHoldingView: View {
     associatedtype RenderingView
     static func created(from image: KFCrossPlatformImage?, context: KFImage.Context<Self>) -> Self
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension KFImageProtocol {
-    public var options: KingfisherParsedOptionsInfo {
+    var options: KingfisherParsedOptionsInfo {
         get { context.options }
         nonmutating set { context.options = newValue }
     }
 
-    public var onFailureDelegate: Delegate<KingfisherError, Void> { context.onFailureDelegate }
-    public var onSuccessDelegate: Delegate<RetrieveImageResult, Void> { context.onSuccessDelegate }
-    public var onProgressDelegate: Delegate<(Int64, Int64), Void> { context.onProgressDelegate }
+    var onFailureDelegate: Delegate<KingfisherError, Void> { context.onFailureDelegate }
+    var onSuccessDelegate: Delegate<RetrieveImageResult, Void> { context.onSuccessDelegate }
+    var onProgressDelegate: Delegate<(Int64, Int64), Void> { context.onProgressDelegate }
 
-    public var delegateObserver: AnyObject { context }
+    var delegateObserver: AnyObject { context }
 }
 
 

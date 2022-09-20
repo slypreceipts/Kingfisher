@@ -25,7 +25,7 @@
 //  THE SOFTWARE.
 
 import XCTest
-import Kingfisher
+@testable import Kingfisher
 
 class ImageModifierTests: XCTestCase {
 
